@@ -2,5 +2,6 @@ AtTime
 AtTime.app/
 .DS_Store
 *.zip
+!AtTime.zip
 build/
 *.dSYM
