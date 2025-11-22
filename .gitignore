@@ -1,0 +1,6 @@
+AtTime
+AtTime.app/
+.DS_Store
+*.zip
+build/
+*.dSYM
