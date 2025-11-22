@@ -7,6 +7,9 @@ BUNDLE_DIR=$(APP_NAME).app
 CONTENTS=$(BUNDLE_DIR)/Contents
 MACOS=$(CONTENTS)/MacOS
 RESOURCES=$(CONTENTS)/Resources
+BUILD=build
+DMGROOT=$(BUILD)/dmgroot
+DMG=$(APP_NAME).dmg
 
 all: $(APP_NAME)
 $(APP_NAME): $(SRC)
@@ -24,9 +27,17 @@ $(CONTENTS)/Info.plist: $(PLIST)
 zip: bundle
 	zip -r $(APP_NAME).zip $(BUNDLE_DIR)
 
+dmg: bundle
+	rm -rf $(DMGROOT)
+	mkdir -p $(DMGROOT)
+	cp -R $(BUNDLE_DIR) $(DMGROOT)/$(BUNDLE_DIR)
+	rm -f $(DMGROOT)/Applications
+	ln -s /Applications $(DMGROOT)/Applications
+	hdiutil create -volname $(APP_NAME) -srcfolder $(DMGROOT) -ov -format UDZO $(DMG)
+
 run: all
 	./$(APP_NAME)
 
 clean:
-	rm -f $(APP_NAME) $(APP_NAME).zip
-	rm -rf $(BUNDLE_DIR)
+	rm -f $(APP_NAME) $(APP_NAME).zip $(DMG)
+	rm -rf $(BUNDLE_DIR) $(BUILD)

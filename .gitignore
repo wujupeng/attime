@@ -3,5 +3,7 @@ AtTime.app/
 .DS_Store
 *.zip
 !AtTime.zip
+*.dmg
+!AtTime.dmg
 build/
 *.dSYM

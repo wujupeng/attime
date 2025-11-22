@@ -17,6 +17,7 @@ jobs:
         with:
           files: |
             AtTime.zip
+            AtTime.dmg
           name: ${{ github.ref_name }}
           tag_name: ${{ github.ref_name }}
           draft: false
